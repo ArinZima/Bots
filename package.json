@@ -1,18 +1,19 @@
 {
-    "name": "bot-name",
+    "name": "kudos-achievements",
     "version": "0.1",
-    "description": "Place the bot's description here.",
+    "description": "An Achievements bot for KudosRP",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: No test specified\" && exit 1"
     },
     "types": "./index.d.ts",
-    "author": "Arin Zima <arin@arinzima.com> (https://arinzima.com)",
+    "author": "Arin Zima <arinzimabusiness@gmail.com> (https://arinzima.com)",
     "license": "ISC",
     "dependencies": {
         "colors": "^1.4.0",
         "discord.js": "^14.14.1",
         "dotenv": "^16.4.1",
-        "fs": "^0.0.1-security"
+        "fs": "^0.0.1-security",
+        "mysql": "^2.18.1"
     }
 }

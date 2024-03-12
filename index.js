@@ -1,20 +1,35 @@
-const { IntentsBitField } = require('discord.js');
-const bitfield = new IntentsBitField();
+const { ShardingManager } = require('discord.js');
+const colors = require('colors');
+colors.enable();
 
-const intents = bitfield.add(1, 2);
-
-const Client = require("./App/Classes/CustomClient"); require("dotenv").config();
-const { Intents } = require('discord.js');
-
-const client = new Client({
-    intents: intents,
-    presence: {
-        status: `online`,
-        afk: false,
-        activities: [{ name: "This is a test.", type: 4 }]
-    }
+const shardman = new ShardingManager("./bot.js", {
+    token: process.env.BOT_TOKEN,
+    respawn: true
 });
 
-[`events`].forEach(h => require(`./App/Handlers/${h}`)(client));
+shardman.on('shardCreate', async shard => {
+    shard.on('ready', async () => {
+        const guildSize = await shard.fetchClientValue('guilds.cache.size');
 
-client.login(process.env.BOT_TOKEN);
+        console.log(`${colors.brightMagenta(`[INFO/SHARD #${shard.id}]:`)} ${colors.green("Spawned!")} ${colors.cyan(`I currently contain ${guildSize} ${guildSize == 1 ? "guild" : "guilds"}.`)}`);
+    });
+
+    shard.on('death', () => {
+        console.log(`${colors.brightMagenta(`[${colors.brightRed("ERROR")}/SHARD #${shard.id}]:`)} ${colors.brightRed("Died!")}`);
+    });
+
+    shard.on('disconnect', () => {
+        console.log(`${colors.brightMagenta(`[${colors.yellow("WARNING")}/SHARD #${shard.id}]:`)} ${colors.yellow("Disconnected!")}`);
+    });
+
+    shard.on('reconnecting', () => {
+        console.log(`${colors.brightMagenta(`[${colors.yellow("WARNING")}/SHARD #${shard.id}]:`)} ${colors.yellow("Reconnecting...")}`);
+    });
+
+    shard.on('resume', () => {
+        console.log(`${colors.brightMagenta(`[INFO/SHARD #${shard.id}]:`)} ${colors.green("Resumed!")}`);
+    });
+});
+
+shardman.spawn({ amount: 1, delay: 1000 })
+.catch(error => console.error(`${colors.brightMagenta(`[${colors.brightRed("ERROR")}/SHARD]:`)} ${colors.brightRed("Shard failed to spawn. ->")} ${colors.yellow(error)}`));

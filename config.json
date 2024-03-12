@@ -1,5 +1,7 @@
 {
-    "bot_server_link": "800436947520192562",
+    "bot_server_link": "global",
+    "embed_color": "Random",
+    "invite": "https://discord.com/oauth2/authorize?client_id=1172559638298886234&scope=bot%20applications.commands&permissions=8",
     "owners": [
         "325951812991451137"
     ],

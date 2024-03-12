@@ -79,7 +79,7 @@ class CommandManager {
     _construct(path, data) {
         if(!path?.length > 0 || !data?.name) { return };
         let repCnt = path.length, fileName = path.pop(), fullPath = [ ...path, fileName ].join('/'); path = path.join('/');
-        console.log(path);
+        // console.log(path);
         if(!existsSync(`Client/Commands/${fullPath}.js`)) {
             mkdirSync(`Client/Commands/${path}`, { recursive: true });
             writeFileSync(`Client/Commands/${fullPath}.js`, readFileSync(`Client/Commands/$template.js`).toString().replace(/\.\.\//g, `../`.repeat(repCnt)));

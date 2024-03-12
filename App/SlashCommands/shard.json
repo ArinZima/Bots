@@ -1,0 +1,66 @@
+{
+    "name": "shard",
+    "description": "Manage the bot's shards!",
+    "options": [
+        {
+            "name": "respawn",
+            "description": "Respawn shards",
+            "type": 2,
+            "options": [
+                {
+                    "name": "all",
+                    "description": "Respawn all shards.",
+                    "type": 1,
+                    "dmPermission": false
+                },
+                {
+                    "name": "single",
+                    "description": "Respawn a single shard",
+                    "type": 1,
+                    "dmPermission": false,
+                    "options": [
+                        {
+                            "name": "shardid",
+                            "description": "The ID of the shard to respawn.",
+                            "type": 4,
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "name": "current",
+                    "description": "Respawn this server's shard",
+                    "type": 1,
+                    "dmPermission": false
+                }
+            ]
+        },
+        {
+            "name": "info",
+            "description": "Check how shards are doing",
+            "type": 2,
+            "options": [
+                {
+                    "name": "single",
+                    "description": "Check a single shard",
+                    "type": 1,
+                    "dmPermission": false,
+                    "options": [
+                        {
+                            "name": "shardid",
+                            "description": "The ID of the shard to check.",
+                            "type": 4,
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "name": "current",
+                    "description": "Check this server's shard",
+                    "type": 1,
+                    "dmPermission": false
+                }
+            ]
+        }
+    ]
+}
